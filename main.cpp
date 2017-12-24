@@ -300,7 +300,8 @@ int main(int argc, char *argv[])
 
     EVP_cleanup();
 
-    return (a.exec());
+//    return(a.exec());
+    return(0);
 }
 
 // [END iot_mqtt_run]

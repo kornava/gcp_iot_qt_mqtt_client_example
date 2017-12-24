@@ -25,5 +25,5 @@ unix:!macx: LIBS += -L$$PWD/libs/ -lpaho-mqtt3cs
 
 
 INSTALLS        = target
-target.files    = DriverWatch_client
+target.files    = mqtt_gcp_client
 target.path     = /home/pi
