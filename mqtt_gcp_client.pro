@@ -15,13 +15,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp
-INCLUDEPATH += $$PWD/../../../../../raspi/sysroot/local/include
-DEPENDPATH += $$PWD/../../../../../raspi/sysroot/local/include
+INCLUDEPATH += $$PWD/include/
+DEPENDPATH += $$PWD/include/
 
-unix:!macx: LIBS += -L$$PWD/../../../../../raspi/sysroot/local/lib/ -ljwt
-unix:!macx: LIBS += -L$$PWD/../../../../../raspi/sysroot/local/lib/ -lcrypto
-unix:!macx: LIBS += -L$$PWD/../../../../../raspi/sysroot/local/lib/ -ljansson
-unix:!macx: LIBS += -L$$PWD/../../../../../raspi/sysroot/local/lib/ -lpaho-mqtt3cs
+unix:!macx: LIBS += -L$$PWD/libs/ -ljwt
+unix:!macx: LIBS += -L$$PWD/libs/ -lcrypto
+unix:!macx: LIBS += -L$$PWD/libs/ -ljansson
+unix:!macx: LIBS += -L$$PWD/libs/ -lpaho-mqtt3cs
 
 
 INSTALLS        = target

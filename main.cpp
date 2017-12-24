@@ -292,7 +292,6 @@ int Publish(char* payload, int payload_size) {
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
-    a.exec();
     OpenSSL_add_all_algorithms();
     OpenSSL_add_all_digests();
     OpenSSL_add_all_ciphers();
@@ -301,7 +300,7 @@ int main(int argc, char *argv[])
 
     EVP_cleanup();
 
-    return 0;
+    return (a.exec());
 }
 
 // [END iot_mqtt_run]
