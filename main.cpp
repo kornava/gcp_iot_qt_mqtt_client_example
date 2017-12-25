@@ -57,15 +57,6 @@ struct {
     "test!" // payload
 };
 
-void Usage() {
-    printf("mqtt_ciotc <message> \\\n");
-    printf("\t--deviceid <your device id>\\\n");
-    printf("\t--region <e.g. us-central1>\\\n");
-    printf("\t--registryid <your registry id>\\\n");
-    printf("\t--projectid <your project id>\\\n");
-    printf("\t--ecpath <e.g. ./ec_private.pem>\\\n");
-    printf("\t--rootpath <e.g. ./roots.pem>\n\n");
-}
 
 // [START iot_mqtt_jwt]
 /**
@@ -148,89 +139,6 @@ static char* CreateJwt(const char* ec_private_path, const char* project_id) {
 }
 // [END iot_mqtt_jwt]
 
-/**
- * Helper to parse arguments passed to app. Returns false if there are missing
- * or invalid arguments; otherwise, returns true indicating the caller should
- * free the calculated client ID placed on the opts structure.
- *
- * TODO: (class) Consider getopt
- */
-// [START iot_mqtt_opts]
-bool GetOpts(int argc, char** argv) {
-    int pos = 2;
-    bool calcvalues = false;
-
-    if (argc < 2) {
-        return false;
-    }
-
-    opts.payload = argv[1];
-
-    while (pos < argc) {
-        if (strcmp(argv[pos], "--deviceid") == 0) {
-            if (++pos < argc) {
-                opts.deviceid = argv[pos];
-                calcvalues = true;
-            }
-            else
-                return false;
-        } else if (strcmp(argv[pos], "--region") == 0) {
-            if (++pos < argc) {
-                opts.region = argv[pos];
-                calcvalues = true;
-            }
-            else
-                return false;
-        } else if (strcmp(argv[pos], "--registryid") == 0) {
-            if (++pos < argc) {
-                opts.registryid = argv[pos];
-                calcvalues = true;
-            }
-            else
-                return false;
-        } else if (strcmp(argv[pos], "--projectid") == 0) {
-            if (++pos < argc) {
-                opts.projectid = argv[pos];
-                calcvalues = true;
-            }
-            else
-                return false;
-        } else if (strcmp(argv[pos], "--ecpath") == 0) {
-            if (++pos < argc)
-                opts.ecpath = argv[pos];
-            else
-                return false;
-        } else if (strcmp(argv[pos], "--rootpath") == 0) {
-            if (++pos < argc)
-                opts.rootpath = argv[pos];
-            else
-                return false;
-        }
-        pos++;
-    }
-
-    if (calcvalues) {
-        int n = snprintf(opts.clientid, sizeof(opts.clientid),
-                         "projects/%s/locations/%s/registries/%s/devices/%s",
-                         opts.projectid, opts.region, opts.registryid, opts.deviceid);
-        if (n < 0 || (n > clientid_maxlen)) {
-            if (n < 0) {
-                printf("Encoding error!\n");
-            } else {
-                printf("Error, buffer for storing client ID was too small.\n");
-            }
-            return false;
-        }
-        if (TRACE) {
-            printf("New client id constructed:\n");
-            printf("%s\n", opts.clientid);
-        }
-
-        return true; // Caller must free opts.clientid
-    }
-    return false;
-}
-// [END iot_mqtt_opts]
 
 static const int kQos = 1;
 static const unsigned long kTimeout = 10000L;
@@ -238,7 +146,7 @@ static const char* kUsername = "unused";
 
 /**
  * Publish a given message, passed in as payload, to Cloud IoT Core using the
- * values passed to the sample, stored in the global opts structure. Returns
+ * values in the opts struct, stored in the global opts structure. Returns
  * the result code from the MQTT client.
  */
 // [START iot_mqtt_publish]
@@ -300,7 +208,7 @@ int main(int argc, char *argv[])
 
     EVP_cleanup();
 
-//    return(a.exec());
+    //return(a.exec());
     return(0);
 }
 
