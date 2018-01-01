@@ -30,6 +30,11 @@
 // [END iot_mqtt_include]
 
 
+/*
+ * TODO: QtMqtt based publish method
+ *
+ * /
+
 #define TRACE 1 /* Set to 1 to enable tracing */
 int clientid_maxlen = 256;
 struct {
@@ -44,6 +49,19 @@ struct {
     char* rootpath;
     char* topic;
     char* payload;
+//} opts = {
+//    "ssl://mqtt.googleapis.com:8883", // address
+//    "projects/driverwatch-189321/locations/europe-west1/registries/general/devices/my-device", // clientid
+//    "my-device", // deviceid
+//    "/home/pi/gcloud/ec_private.pem", // ecpath
+//    "driverwatch-189321", // projectid
+//    "europe-west1", // region
+//    "general", // registryid
+//    "roots.pem", // rootpath
+//    "/devices/my-device/events", // topic
+//    "test!" // payload
+//};
+
 } opts = {
     "ssl://mqtt.googleapis.com:8883", // address
     "projects/driverwatch-189321/locations/europe-west1/registries/general/devices/my-device", // clientid

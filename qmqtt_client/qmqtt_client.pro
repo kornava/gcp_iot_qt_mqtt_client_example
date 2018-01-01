@@ -15,16 +15,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += main.cpp
-INCLUDEPATH += $$PWD/include/
-DEPENDPATH += $$PWD/include/
+SOURCES += main.cpp \
+    mqttmanger.cpp
 
-unix:!macx: LIBS += -L$$PWD/libs/ -ljwt
-unix:!macx: LIBS += -L$$PWD/libs/ -lcrypto
-unix:!macx: LIBS += -L$$PWD/libs/ -ljansson
-unix:!macx: LIBS += -L$$PWD/libs/ -lpaho-mqtt3cs
+HEADERS += \
+    mqttmanger.h
 
+LIBS += -ljwt
 
-INSTALLS        = target
-target.files    = mqtt_gcp_client
-target.path     = /home/pi
+#unix:!macx: LIBS += -L$$PWD/LIBS/ -ljwt
